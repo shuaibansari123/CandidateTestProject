@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from .models import UserCandidate , Question, Answer
 from django.views.decorators.csrf import csrf_exempt
 
+
 @csrf_exempt
 def create_user_view(request):
     if request.method == 'POST':
