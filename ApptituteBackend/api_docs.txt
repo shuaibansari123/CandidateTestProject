@@ -1,0 +1,195 @@
+localhost:8000/create_user  --> POST with data 
+					{'name':'username','email':'useremail@.com', 'phone':'+9111111111',
+					'ctc' : '6000000' , 'role':'frotend developer'}
+
+
+
+localhost:8000/submit_answer --> POST with data
+					{'question_id' : 1 , 'candidate_id':2 , 'user_selected_answer' :'A'}
+						This should be 'user_selected_answer' :'A' or 'B' or 'C' or 'D'
+
+localhost:8000/get_question/1(question_id) --> GET returning single question
+
+format 
+{
+    "status": "success",
+    "data": {
+        "id": 2,
+        "question_text": "Test Question 2",
+        "A": "A",
+        "B": "B",
+        "C": "C",
+        "D": "D"
+    }
+}
+
+
+localhost:8000/get_all_question  --> GET --> returning all question 
+						 
+format 
+{
+    	"status": "success",
+    	"message": "all questions retrieved",
+    	"data": [
+        {
+            "id": 1,
+            "question_text": "Test Question 1",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 2,
+            "question_text": "Test Question 2",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 3,
+            "question_text": "Test Question 3",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 4,
+            "question_text": "Test Question 4",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 5,
+            "question_text": "Test Question 5",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 6,
+            "question_text": "Test Question 6",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 7,
+            "question_text": "Test Question 7",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 8,
+            "question_text": "Test Question 8",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 9,
+            "question_text": "Test Question 9",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 10,
+            "question_text": "Test Question 10",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 11,
+            "question_text": "Test Question 11",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 12,
+            "question_text": "Test Question 12",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 13,
+            "question_text": "Test Question 13",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 14,
+            "question_text": "Test Question 14",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 15,
+            "question_text": "Test Question 15",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 16,
+            "question_text": "Test Question 16",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 17,
+            "question_text": "Test Question 17",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 18,
+            "question_text": "Test Question 18",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 19,
+            "question_text": "Test Question 19",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        },
+        {
+            "id": 20,
+            "question_text": "Test Question 20",
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D"
+        }
+    ]
+}
