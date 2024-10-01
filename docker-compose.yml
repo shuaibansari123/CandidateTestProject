@@ -20,6 +20,8 @@ services:
     build:
       context: ./frontend
     container_name: frontend
+    volumes:
+      - ./frontend/src:/app/frontend/src
     ports:
       - "3000:3000"
     stdin_open: true
