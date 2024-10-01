@@ -26,6 +26,7 @@ COPY --from=build /app/build ./build
 
 # Install serve globally
 RUN npm install -g serve
+RUN npm i react-icons
 
 # Expose the port that the app runs on
 EXPOSE 3000
