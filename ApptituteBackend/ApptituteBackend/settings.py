@@ -168,3 +168,21 @@ USE_X_FORWARDED_HOST = True
 
 # Add to ensure that it recognizes HTTPS connections
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+import os
+# In future we need to change this to use S3/Google Storage Bucket
+STATIC_URL = '/static/' , # The base URL for static files
+
+    # Specify where Django should look for static files besides the default 'static' folder in each app
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  
+    ],
+
+    # The directory where Django will collect all static files with 'collectstatic' command
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles'),
+
+    # MEDIA FILES SETTINGS (for user-uploaded content)
+MEDIA_URL = '/media/',  # The base URL for media files,
+
+    # Where uploaded files will be stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media'),
