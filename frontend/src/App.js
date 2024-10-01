@@ -1,12 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignUpForm from './pages/SignUpForm';
+import QuizQuestion from './pages/QuizQuestion';
 
 function App() {
   return (
-    <div className="">
-     <SignUpForm/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignUpForm />} />
+        <Route path="/test-start" element={<QuizQuestion />} />
+      </Routes>
+    </Router>
   );
 }
 

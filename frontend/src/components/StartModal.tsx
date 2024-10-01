@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 function Modal({ isOpen, onClose, onConfirm }) {
   if (!isOpen) return null;
@@ -9,8 +9,8 @@ function Modal({ isOpen, onClose, onConfirm }) {
     <div className="fixed inset-0 bg-gray-600 bg-opacity-85 overflow-y-auto h-full w-full flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-xl max-w-[400px] w-full h-[220px]">
         <h2 className="text-lg  mb-4 text-center">
-          This test consist of <span className="font-bold"> 12 Minutes!!</span>{" "}
-          Good luck for the test and click on the start test when you are ready
+          This test consists of <span className="font-bold">12 Minutes!!</span>{" "}
+          Good luck for the test and click on the start test when you are ready.
         </h2>
 
         <div className="flex justify-between px-10 mt-8">
@@ -34,7 +34,7 @@ function Modal({ isOpen, onClose, onConfirm }) {
 
 export default function SignUpForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleSubmit = (values) => {
     console.log("Form values", values);
@@ -54,14 +54,10 @@ export default function SignUpForm() {
   return (
     <div className="">
       <div className="flex flex-col md:flex-row items-center gap-5 max-h-screen">
-        <div className="lg:w-1/1 hidden md:block ">
+        <div className="lg:w-1/1">
           <img src="question.png" alt="" style={{ maxHeight: "100vh" }} />
         </div>
-        <div className="w-full max-w-md mx-auto px-4 lg:px-0 lg:w-1/3 lg:ml-10"
-  style={{ padding: "40px 20px 0px" }}>
-    <div className="block md:hidden">
-          <img src="logos.png" alt="logos" className="w-40 h-auto" />
-        </div>
+        <div className="lg:w-1/3 ml-10">
           <h1 className="text-3xl font-bold mb-6">
             Please Sign up for the test!
           </h1>
@@ -179,7 +175,7 @@ export default function SignUpForm() {
                 <div>
                   <button
                     type="submit"
-                    className="py-3 px-4 mt-3  w-[200px] border border-transparent rounded-full shadow-sm text-lg font-medium text-white bg-orange-400 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                    className="py-2 px-4 mt-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-400 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                     disabled={!(isValid && dirty)}
                   >
                     Get Started
