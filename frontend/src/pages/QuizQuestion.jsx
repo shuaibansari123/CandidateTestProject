@@ -12,7 +12,7 @@ const QuizComponent = () => {
   const [loading, setLoading] = useState(true);
   const [candidateId] = useState(2);
   const [questionId, setQuestionId] = useState(1);
-  const [timeRemaining, setTimeRemaining] = useState(12 * 60);
+  const [timeRemaining, setTimeRemaining] = useState(12 * 60);  
   const [isTimeUpModalOpen, setIsTimeUpModalOpen] = useState(false);
   
   const location = useLocation();
