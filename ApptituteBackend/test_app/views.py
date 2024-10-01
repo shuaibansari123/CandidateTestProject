@@ -4,18 +4,23 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from .models import UserCandidate , Question, Answer
 from django.views.decorators.csrf import csrf_exempt
-
+import json
 
 @csrf_exempt
 def create_user_view(request):
     if request.method == 'POST':
         try:
-            print(request.POST, type(request.POST) , request.POST.get('name') , '------create user view------')
-            name = request.POST.get('name')
-            email = request.POST.get('email')
-            phone = request.POST.get('phone') 
-            ctc = request.POST.get('ctc')
-            role = request.POST.get('role')
+            # Parse JSON payload
+            data = json.loads(request.body)
+
+            print(request.POST, type(request.POST) , request.POST.get('name') , '  REQUEST.POST ------create user view------')
+            print(data , '----data')
+
+            name = data.get('name')
+            email = data.get('email')
+            phone = data.get('phone') 
+            ctc = data.get('ctc')
+            role = data.get('role')
             instance = UserCandidate(name=name , email=email , phone=phone, ctc=ctc , role=role)
             instance.save()
             return JsonResponse({'status':'success' , 'message':'user created' , 'data':   
@@ -31,10 +36,13 @@ def create_user_view(request):
 @csrf_exempt
 def submit_answer(request):
     if request.method == 'POST':
+
         try:
-            user_selected_answer = request.POST.get('user_selected_answer')
-            question = get_object_or_404( Question , quest_id=int(request.POST.get('question_id')))
-            candidate = get_object_or_404( UserCandidate , id=int(request.POST.get('candidate_id')))
+            # Parse JSON payload
+            data = json.loads(request.body)
+            user_selected_answer = data.get('user_selected_answer')
+            question = get_object_or_404( Question , quest_id=int(data.get('question_id')))
+            candidate = get_object_or_404( UserCandidate , id=int(data.get('candidate_id')))
 
             answer_instance = Answer(candidate=candidate , question = question,
                                     user_selected_answer=user_selected_answer)
