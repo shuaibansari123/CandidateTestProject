@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 def create_user_view(request):
     if request.method == 'POST':
         try:
+            print(request.POST, type(request.POST) , request.POST.get('name') , '------create user view------')
             name = request.POST.get('name')
             email = request.POST.get('email')
             phone = request.POST.get('phone') 
