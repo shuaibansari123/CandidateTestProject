@@ -12,7 +12,7 @@ const QuizComponent = () => {
   const [loading, setLoading] = useState(true);
   const [candidateId] = useState(2);
   const [questionId, setQuestionId] = useState(1);
-  const [timeRemaining, setTimeRemaining] = useState(1 * 60);
+  const [timeRemaining, setTimeRemaining] = useState(12 * 60);
   const [isTimeUpModalOpen, setIsTimeUpModalOpen] = useState(false);
   
   const location = useLocation();
@@ -184,7 +184,7 @@ const QuizComponent = () => {
         {isTimeUpModalOpen && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-85 flex items-center justify-center">
             <div className="bg-white p-8 rounded-lg shadow-xl max-w-[400px]">
-              <h1 className="text-[36px] text-center mb-4">Time's Up!</h1>
+              <h1 className="text-[36px] text-center mb-4 font-bold">Time's Up!</h1>
               <h5 className="text-center mb-4">Your time to complete the test is over.</h5>
               <button
                 className="w-full bg-red-500 text-white py-2 rounded"
