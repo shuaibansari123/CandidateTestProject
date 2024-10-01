@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Modal({ isOpen, onClose, onConfirm }) {
   if (!isOpen) return null;
 
+  
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-85 overflow-y-auto h-full w-full flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-xl max-w-[400px] w-full h-[220px]">
