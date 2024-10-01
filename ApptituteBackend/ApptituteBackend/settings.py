@@ -147,10 +147,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3030',
     'http://localhost:3000',
     'http://localhost:8000',
-    'hiringape.com' , 
-    'www.hiringape.com' ,
-    'https://www.hringape.com' ,
-    '*', # remove this
+    'https://hiringape.com' , 
+    'https://www.hiringape.com' ,
 ]
 
 
@@ -163,3 +161,10 @@ CORS_ALLOW_METHODS = [
     "OPTIONS" ,
     '*' # remove this
 ]
+
+
+# Update to indicate that the application is behind a reverse proxy
+USE_X_FORWARDED_HOST = True
+
+# Add to ensure that it recognizes HTTPS connections
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

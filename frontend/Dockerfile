@@ -12,6 +12,7 @@ RUN npm install
 # Copy the rest of the project files
 COPY . .
 
+RUN npm i react-icons
 # Build the React app for production
 RUN npm run build
 
@@ -26,6 +27,7 @@ COPY --from=build /app/build ./build
 
 # Install serve globally
 RUN npm install -g serve
+
 
 # Expose the port that the app runs on
 EXPOSE 3000
