@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-dy#rp(hm@4#1^#o_yfm5dit1ntkk@6pnb(naq(m61)ug_a1cbj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*' , 'localhost' ,'127.0.0.1' , '127.0.0.1']
+ALLOWED_HOSTS = ['*' , 'localhost' ,'127.0.0.1' , '127.0.0.1' , 'hiringape.com' , 'www.hiringape.com' ]
 
 
 # Application definition
@@ -147,4 +147,18 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3030',
     'http://localhost:3000',
     'http://localhost:8000',
+    'hiringape.com' , 
+    'www.hiringape.com' ,
+    'https://www.hringape.com' ,
+    '*', # remove this
+]
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS" ,
+    '*' # remove this
 ]
