@@ -149,7 +149,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'https://hiringape.com' , 
     'https://www.hiringape.com' ,
-    '*', # remove this
 ]
 
 
