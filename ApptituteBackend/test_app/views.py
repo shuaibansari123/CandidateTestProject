@@ -6,6 +6,7 @@ from .models import UserCandidate , Question, Answer
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+
 @csrf_exempt
 def create_user_view(request):
     if request.method == 'POST':
