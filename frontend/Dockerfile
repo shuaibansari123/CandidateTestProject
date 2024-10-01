@@ -15,8 +15,8 @@ COPY . .
 # Build the React app for production
 RUN npm run build
 
-# Use a minimal HTTP server to serve the static files
-FROM serve:latest
+# Use the same Node.js image to serve the static files
+FROM node:18
 
 # Set the working directory for serve
 WORKDIR /app
@@ -24,9 +24,11 @@ WORKDIR /app
 # Copy the build files from the previous stage
 COPY --from=build /app/build ./build
 
+# Install serve globally
+RUN npm install -g serve
+
 # Expose the port that the app runs on
 EXPOSE 3000
-
 
 # Command to run the app
 CMD ["serve", "-s", "build", "-l", "3000"]
