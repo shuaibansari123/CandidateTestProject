@@ -168,4 +168,3 @@ USE_X_FORWARDED_HOST = True
 
 # Add to ensure that it recognizes HTTPS connections
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
