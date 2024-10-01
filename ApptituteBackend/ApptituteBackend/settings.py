@@ -153,6 +153,7 @@ CORS_ALLOWED_ORIGINS = [
     '*', # remove this
 ]
 
+
 CORS_ALLOW_METHODS = [
     "GET",
     "POST",
