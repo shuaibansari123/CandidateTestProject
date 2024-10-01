@@ -84,7 +84,7 @@ export default function SignUpForm() {
           <img src="online_test.png" alt="" style={{ maxHeight: "100vh" }} />
         </div>
         <div
-          className="w-full max-w-md mx-auto px-4 lg:px-0 lg:w-1/4 lg:ml-10"
+          className="w-full max-w-lg px-4 lg:px-0 lg:w-1/2 lg:ml-10"
           style={{ padding: "40px 20px 0px" }}
         >
           <div className="block md:hidden">
