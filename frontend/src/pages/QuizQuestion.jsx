@@ -1,20 +1,82 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { FaCheck } from "react-icons/fa";
+import ApiConfig from "../apiConfig/ApiConfig";
 
 const QuizComponent = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [question, setQuestion] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [candidateId] = useState(2); 
+  const [questionId, setQuestionId] = useState(1); 
 
-  const question = {
-    text: "A software company's annual revenue increased by 12% in 2023 from $300,000 in 2022. What was the revenue in 2023?",
-    options: ["$312,000", "$336,000", "$360,000", "$400,000"],
+  const fetchQuestion = async (id) => {
+    try {
+      const response = await axios.get(
+        `${ApiConfig.baseUrl}${ApiConfig.endpoints.getSingleQuestion(id)}`
+      );
+
+      if (response.data.status === "success") {
+        const { question_text, A, B, C, D } = response.data.data;
+        setQuestion({
+          text: question_text,
+          options: [A, B, C, D],
+        });
+        setQuestionId(response.data.data.id);
+      } else {
+        console.error("Error fetching question:", response.data.message);
+      }
+    } catch (error) {
+      console.error("API error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    fetchQuestion(questionId);
+  }, [questionId]);
+
+  const handleNext = async () => {
+    if (!selectedAnswer) {
+      return; // Do nothing if no answer is selected
+    }
+
+    try {
+      const response = await axios.post(
+        `${ApiConfig.baseUrl}${ApiConfig.endpoints.submitAnswer}`,
+        {
+          question_id: questionId,
+          candidate_id: candidateId,
+          user_selected_answer: selectedAnswer,
+        }
+      );
+
+      // Move to the next question regardless of API response
+      setQuestionId((prevId) => prevId + 1);
+      setSelectedAnswer(null);
+
+      if (response.data.status !== "success") {
+        console.error("Error submitting answer:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex flex-col md:flex-row items-center gap-5 max-h-screen">
       <div className="lg:w-1/1 hidden md:block">
-        <img src="question.png" alt="" style={{ maxHeight: "100vh" }} />
+        <img src="online_test.png" alt="" style={{ maxHeight: "100vh" }} />
       </div>
-      <div className="w-full max-lg-md mx-auto px-4 lg:px-0 lg:w-1/2 lg:ml-10" style={{ padding: "40px 20px 0px" }}>
+      <div
+        className="w-full max-lg-md mx-auto px-4 lg:px-0 lg:w-1/2 lg:ml-10"
+        style={{ padding: "40px 20px 0px" }}
+      >
         <div className="block md:hidden">
           <img src="logos.png" alt="logos" className="w-40 h-auto" />
         </div>
@@ -25,7 +87,7 @@ const QuizComponent = () => {
           </button>
         </div>
         <div className="flex justify-between items-center mb-6">
-          <span className="text-md text-gray-600">Question 1 out of 20</span>
+          <span className="text-md text-gray-600">Question {questionId} out of 20</span>
         </div>
         <h2 className="text-lg font-semibold mb-6">{question.text}</h2>
         <div className="space-y-3">
@@ -58,10 +120,12 @@ const QuizComponent = () => {
             </label>
           ))}
         </div>
-        <button className="mt-8 w-full md:w-[200px] bg-orange-400 text-white text-lg py-3 px-4 rounded-full hover:bg-orange-500 transition duration-300 font-medium">
-  Next
-</button>
-
+        <button
+          className="mt-8 w-full md:w-[200px] bg-orange-400 text-white text-lg py-3 px-4 rounded-full hover:bg-orange-500 transition duration-300 font-medium"
+          onClick={handleNext}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

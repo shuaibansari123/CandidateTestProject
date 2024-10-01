@@ -1,5 +1,5 @@
 const ApiConfig = {
-    baseUrl: "http://hiringape.com:8000/",
+    baseUrl: "https://hiringape.com/api/",
     endpoints: {
       createUser: "create_user",
       getSingleQuestion: (id) => `get_question/${id}`,
