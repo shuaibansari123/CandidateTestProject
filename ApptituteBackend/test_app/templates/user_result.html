@@ -8,21 +8,23 @@
   </head>
   <body>
       <div class="container mt-5">
-          <h1 class="mb-4">Answers for {{ user.name }}</h1>
+          <h1 class="mb-4" style="text-align: center; color: white;
+    background-color: #2fc771;
+    border-radius: 10px;">Answers for {{ user.name }}</h1>
           
           <div class="row">
               <div class="col-md-6">
-                  <p><strong>Total Questions Attended:</strong> {{ total_attended_answers }}</p>
+                  <p style="text-align: center; color: green;"><strong>Total Questions Attended:</strong> {{ total_attended_answers }}</p>
               </div>
               <div class="col-md-6">
-                  <p><strong>Total Correct Answers:</strong> {{ total_correct_answers }}</p>
+                  <p style="text-align: center; color: green;"><strong>Total Correct Answers:</strong> {{ total_correct_answers }}</p>
               </div>
           </div>
       
-          <table class="table table-striped table-bordered">
+          <table class="table table-striped table-bordered" style="margin-top:20px; ">
               <thead class="thead-dark">
                   <tr>
-                      <th scope="col">Question</th>
+                      <th scope="col" style="text-align: center;">Question</th>
                       <th scope="col">Correct Answer</th>
                       <th scope="col">User's Answer</th>
                   </tr>
