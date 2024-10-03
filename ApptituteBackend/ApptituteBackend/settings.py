@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     'test_app',
     'corsheaders',
+    # for formatted question field
+    'ckeditor',
+    'ckeditor_uploader',
     #'rest_framework',
 ]
 
@@ -63,7 +66,7 @@ ROOT_URLCONF = 'ApptituteBackend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -186,3 +189,23 @@ MEDIA_URL = '/media/'  # The base URL for media files,
 
     # Where uploaded files will be stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# ckeditor configs
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 'auto',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar'],
+            ['Source'],
+        ],
+    },
+}
