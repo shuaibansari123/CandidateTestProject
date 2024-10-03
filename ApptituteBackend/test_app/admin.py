@@ -15,7 +15,6 @@ class QuestionAdminForm(forms.ModelForm):
 class QuestionAdmin(admin.ModelAdmin):
     form = QuestionAdminForm
 
-
 admin.site.register(Answer)
 admin.site.register(UserCandidate)
 admin.site.register(Question)
