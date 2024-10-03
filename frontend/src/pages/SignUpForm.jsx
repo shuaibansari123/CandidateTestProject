@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import ApiConfig from "../apiConfig/ApiConfig";
+import * as Yup from "yup";
 
 function Modal({ isOpen, onClose, onConfirm }) {
   if (!isOpen) return null;
@@ -35,6 +36,16 @@ function Modal({ isOpen, onClose, onConfirm }) {
   );
 }
 
+const validationSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
+  phone: Yup.string()
+    .required("Phone no. is required")
+    .matches(/^[0-9]+$/, "Must be a number"),
+  email: Yup.string().email("Invalid email format").required("Email is required"),
+  testType: Yup.string().required("Test type is required"),
+  ctc: Yup.string().required("Expected CTC is required"),
+});
+
 export default function SignUpForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -51,8 +62,6 @@ export default function SignUpForm() {
           role: values.testType,
         }
       );
-
-      console.log("API response:", response.data);
 
       if (response.data.status === "success") {
         setIsModalOpen(true);
@@ -73,22 +82,21 @@ export default function SignUpForm() {
 
   const handleModalConfirm = () => {
     setIsModalOpen(false);
-    navigate("/test-start");
-    console.log("Starting the test...");
+    navigate("/test-start", { state: { startTimer: true } });
   };
 
   return (
     <div className="">
       <div className="flex flex-col lg:flex-row items-center gap-8 max-h-screen">
-        <div className="md:w-1/2 hidden md:block ">
+        <div className="md:w-1/2 hidden lg:block ">
           <img src="online_test.png" alt="" style={{ maxHeight: "100vh" }} />
         </div>
         <div
           className="w-full max-w-lg px-4 lg:px-0 lg:w-1/2 lg:ml-10"
           style={{ padding: "40px 20px 0px" }}
         >
-          <div className="block md:hidden">
-            <img src="logos.png" alt="logos" className="w-40 h-auto" />
+          <div className="block lg:hidden">
+            <img src="logos.png" alt="logos" className="w-45 h-auto" />
           </div>
           <h1 className="text-3xl font-bold mb-6">
             Please Sign up for the test!
@@ -99,13 +107,17 @@ export default function SignUpForm() {
               name: "",
               phone: "",
               email: "",
-              testType: "Aptitude",
+              testType: "",
               ctc: "",
             }}
+            validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({ isValid, dirty }) => (
+            {({ isValid, dirty, errors, touched }) => (
               <Form className="space-y-4">
+             
+                {console.log({ isValid, dirty, errors, touched })}
+
                 <div>
                   <label
                     htmlFor="name"
@@ -120,6 +132,9 @@ export default function SignUpForm() {
                     placeholder="Enter your name here..."
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
+                  {errors.name && touched.name && (
+                    <div className="text-red-600 text-sm">{errors.name}</div>
+                  )}
                 </div>
 
                 <div>
@@ -133,9 +148,12 @@ export default function SignUpForm() {
                     type="tel"
                     id="phone"
                     name="phone"
-                    placeholder="+91"
+                    placeholder="Please enter phone no."
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
+                  {errors.phone && touched.phone && (
+                    <div className="text-red-600 text-sm">{errors.phone}</div>
+                  )}
                 </div>
 
                 <div>
@@ -152,6 +170,9 @@ export default function SignUpForm() {
                     placeholder="Enter your Email here..."
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
+                  {errors.email && touched.email && (
+                    <div className="text-red-600 text-sm">{errors.email}</div>
+                  )}
                 </div>
 
                 <div>
@@ -168,8 +189,12 @@ export default function SignUpForm() {
                       name="testType"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 appearance-none"
                     >
+                      <option value="">Select</option>
                       <option value="Aptitude">Aptitude</option>
                     </Field>
+                    {errors.testType && touched.testType && (
+                      <div className="text-red-600 text-sm">{errors.testType}</div>
+                    )}
                     <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                       <svg
                         className="w-5 h-5 text-gray-400"
@@ -202,12 +227,15 @@ export default function SignUpForm() {
                     placeholder="For Ex. 35000"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
+                  {errors.ctc && touched.ctc && (
+                    <div className="text-red-600 text-sm">{errors.ctc}</div>
+                  )}
                 </div>
 
                 <div>
                   <button
                     type="submit"
-                    className="py-2 px-4 mt-3  w-[200px] border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-orange-400 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                    className="py-2 px-4 mt-3 w-[200px] border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-orange-400 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                     disabled={!(isValid && dirty)}
                   >
                     Get Started
@@ -223,7 +251,7 @@ export default function SignUpForm() {
         onClose={handleModalClose}
         onConfirm={handleModalConfirm}
       />
-      <Toaster position="top-right" />
+      <Toaster />
     </div>
   );
 }
