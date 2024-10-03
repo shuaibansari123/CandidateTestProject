@@ -23,8 +23,8 @@ def create_user_view(request):
             ctc = data.get('ctc')
             role = data.get('role')
 
-            instance = UserCandidate.objects.filter( email=email )
-            if instance.first():
+            instance = UserCandidate.objects.filter( email=email ).first()
+            if instance:
                 return JsonResponse({'status':'failed' , 'message':'email already exist' , 'data':   
                                         { 'Id':instance.id , 'name':instance.name,
                                         'phone': instance.phone , 'email':instance.email,
