@@ -69,17 +69,23 @@ def get_single_question_view(request , id):
         question_instance = Question.objects.get(quest_id=id)
         # condition for formatted question like code
         question_text = question_instance.question_text
-        if not question_instance.question_text or question_text == 'None' or question_text.strip() == '':
+        if question_text == 'None' :
             question_text = question_instance.question_formatted_text
         
+            return JsonResponse({'status':'success' , 'data' : 
+                                            { "question_type" : "formatted-text" ,
+                                            'hint': "to correctly display this field use this <div dangerouslySetInnerHTML={{ __html: questionData.question_text }} />" , 
+                                            'id': question_instance.quest_id, 'question_text' : question_text,
+                                            'A':question_instance.A , 'B':question_instance.B , 'C':question_instance.C,
+                                            'D':question_instance.D
+                                            }
+                                    }, safe=False)
         return JsonResponse({'status':'success' , 'data' : 
-                                        { "question_type" : "formatted-text" ,
-                                         'hint': "to correctly display this field use this <div dangerouslySetInnerHTML={{ __html: questionData.question_text }} />" , 
-                                         'id': question_instance.quest_id, 'question_text' : question_text,
-                                        'A':question_instance.A , 'B':question_instance.B , 'C':question_instance.C,
-                                        'D':question_instance.D
-                                        }
-                                }, safe=False)
+                                            { 'id': question_instance.quest_id, 'question_text' : question_text,
+                                            'A':question_instance.A , 'B':question_instance.B , 'C':question_instance.C,
+                                            'D':question_instance.D
+                                            }
+                                    }, safe=False)
     return JsonResponse({'status':'failed' , 'message':'id is required'} , safe=False)
 
 @csrf_exempt
