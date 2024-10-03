@@ -59,9 +59,10 @@ def get_single_question_view(request , id):
     if  id:
         question_instance = Question.objects.get(quest_id=id)
         # condition for formatted question like code
+        question_text = question_instance.question_text
         if not question_instance.question_text or question_text == 'None' or question_text.strip() == '':
             question_text = question_instance.question_formatted_text
-        question_text = question_instance.question_text
+        
         return JsonResponse({'status':'success' , 'data' : 
                                     { 'id': question_instance.quest_id, 'question_text' : question_text,
                                     'A':question_instance.A , 'B':question_instance.B , 'C':question_instance.C,
