@@ -22,6 +22,15 @@ def create_user_view(request):
             phone = data.get('phone') 
             ctc = data.get('ctc')
             role = data.get('role')
+
+            instance = UserCandidate.objects.filter( email=email )
+            if instance:
+                return JsonResponse({'status':'failed' , 'message':'email already exist' , 'data':   
+                                        { 'Id':instance.id , 'name':instance.name,
+                                        'phone': instance.phone , 'email':instance.email,
+                                        'role':instance.role , 'CTC': instance.ctc 
+                                        }
+                                })
             instance = UserCandidate(name=name , email=email , phone=phone, ctc=ctc , role=role)
             instance.save()
             return JsonResponse({'status':'success' , 'message':'user created' , 'data':   
