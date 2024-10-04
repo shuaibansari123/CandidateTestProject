@@ -7,7 +7,7 @@ class UserCandidate(models.Model):
     name = models.CharField(_("Name"), max_length=255 )
     email = models.CharField(_("Email"), max_length=255 , unique=True)
     phone = models.CharField(_("Phone Number"), max_length=255 , unique=True)
-    ctc = models.CharField(_("CTC"), max_length=255)
+    ctc = models.CharField(_("CTC"), max_length=255 , null=True , blank=True)
     role = models.CharField(_("Role"), max_length=255) 
 
     # add additional fields in here

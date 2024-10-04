@@ -152,6 +152,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'https://hiringape.com' , 
     'https://www.hiringape.com' ,
+    
 ]
 
 
@@ -170,7 +171,7 @@ CORS_ALLOW_METHODS = [
 USE_X_FORWARDED_HOST = True
 
 # Add to ensure that it recognizes HTTPS connections
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 import os
 # In future we need to change this to use S3/Google Storage Bucket
