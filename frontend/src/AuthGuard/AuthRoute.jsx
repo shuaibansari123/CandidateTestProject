@@ -1,8 +1,8 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+// import React from 'react';
+// import { Navigate } from 'react-router-dom';
 
-const AuthRoute = ({ children, isAuthenticated }) => {
-  return isAuthenticated ? children : <Navigate to="/" />;
-};
+// const AuthRoute = ({ children, isAuthenticated }) => {
+//   return isAuthenticated ? children : <Navigate to="/" />;
+// };
 
-export default AuthRoute;
+// export default AuthRoute;

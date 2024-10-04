@@ -66,6 +66,8 @@ export default function SignUpForm() {
       if (response.data.status === "success") {
         setIsModalOpen(true);
         toast.success("User created successfully!");
+        const candidateId = parseInt(response.data.data.Id); 
+        localStorage.setItem('candidateId', candidateId);
       } else {
         console.error("Error creating user:", response.data.message);
         toast.error(`Error: ${response.data.message}`);
@@ -82,7 +84,11 @@ export default function SignUpForm() {
 
   const handleModalConfirm = () => {
     setIsModalOpen(false);
-    navigate("/test-start", { state: { startTimer: true } });
+  
+    const candidateId = localStorage.getItem('candidateId'); 
+    navigate("/test-start", {
+      state: { startTimer: true, candidateId },
+    });
   };
 
   return (

@@ -10,13 +10,14 @@ const QuizComponent = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [question, setQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [candidateId] = useState(2);
+  // const [candidateId] = useState();
+  
   const [questionId, setQuestionId] = useState(1);
   const [timeRemaining, setTimeRemaining] = useState(12 * 60);  
   const [isTimeUpModalOpen, setIsTimeUpModalOpen] = useState(false);
   
   const location = useLocation();
-  const { startTimer } = location.state || {};
+  const { startTimer, candidateId } = location.state || {};
 
   const fetchQuestion = async (id) => {
     try {
@@ -83,7 +84,7 @@ const QuizComponent = () => {
       );
 
       if (response.data.status === "success") {
-        if (questionId >= 19) {
+        if (questionId > 19) {
           navigate("/submitted");
         } else {
           setQuestionId((prevId) => prevId + 1); 
