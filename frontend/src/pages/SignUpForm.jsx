@@ -83,17 +83,15 @@ export default function SignUpForm() {
   const handleModalConfirm = () => {
     setIsModalOpen(false);
     const candidateId = localStorage.getItem('candidateId'); 
-    // alert("i m here..")
     navigate("/test-start", {
       state: { startTimer: true, candidateId },
     });
-    // alert("i m here again..")
   };
 
   return (
     <div className="relative">
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-50"
+        className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{
           backgroundImage: "url('background.png')",
         }}

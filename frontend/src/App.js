@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignUpForm from './pages/SignUpForm';
-import QuizComponent from './pages/QuizComponent';
+// import QuizQuestion from './pages/QuizQuestion';
 import SubmittedPage from './pages/SubmittedPage';
+import QuizComponent from './pages/QuizComponent';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-  };
-
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SignUpForm onLogin={handleLogin} />} />
+        <Route path="/" element={<SignUpForm />} />
         <Route path="/test-start" element={<QuizComponent />} />
         <Route path="/submitted" element={<SubmittedPage />} />
       </Routes>

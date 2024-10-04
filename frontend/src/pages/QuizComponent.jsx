@@ -119,15 +119,15 @@ const QuizComponent = () => {
   };
 
   return (
-    <div className="relative"
-  >
-     <div
+    <div className="relative">
+       <div
         className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{
           backgroundImage: "url('background.png')",
         }}
       ></div>
- <div className="flex flex-col md:flex-row items-center gap-5 max-h-screen">
+
+    <div className="relative flex flex-col md:flex-row items-center gap-5 max-h-screen">
       <div className="lg:w-1/1 hidden lg:block">
         <img src="online_test.png" alt="" style={{ maxHeight: "100vh" }} />
       </div>
@@ -218,7 +218,6 @@ const QuizComponent = () => {
       </div>
     </div>
     </div>
-   
   );
 };
 
