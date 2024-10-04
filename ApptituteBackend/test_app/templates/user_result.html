@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Result of {{ user.name }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
@@ -45,7 +45,7 @@
 
                       <td>{{ answer.question.correct_answer }}</td>
                       <td>{{ answer.user_selected_answer }}</td>
-                      <td>A: {{ answer.question.A }}, B: {{ answer.question.B }}, C: {{ answer.question.C }}, D: {{ answer.question.D }}</td>
+                      <td><b>A:</b> {{ answer.question.A }}, <b>B:</b> {{ answer.question.B }}, <b>C:</b> {{ answer.question.C }}, <b>D:</b> {{ answer.question.D }}</td>
                   </tr>
                   {% endfor %}
               </tbody>

@@ -24,27 +24,19 @@ def create_user_view(request):
             role = data.get('role')
 
             instance = UserCandidate.objects.filter( email=email ).first()
+            instance2 = UserCandidate.objects.filter( phone=phone ).first()
             if instance:
-                return JsonResponse({'status':'failed' , 'message':'email already exist' , 'data':   
+                msg , sts ='email already exist' , 'failed'
+            elif instance2:
+                instance , msg, sts = instance2 , 'phone already exist' , 'failed'
+            else:
+                instance = UserCandidate(name=name , email=email , phone=phone, role=role)
+                instance.save()
+                msg, sts ='user created' , 'succuess'
+            return JsonResponse({'status':sts , 'message':msg , 'data':   
                                         { 'Id':instance.id , 'name':instance.name,
                                         'phone': instance.phone , 'email':instance.email,
                                         'role':instance.role 
-                                        }
-                                })
-            instance = UserCandidate.objects.filter( phone=phone ).first()
-            if instance:
-                return JsonResponse({'status':'failed' , 'message':'phone already exist' , 'data':   
-                                        { 'Id':instance.id , 'name':instance.name,
-                                        'phone': instance.phone , 'email':instance.email,
-                                        'role':instance.role 
-                                        }
-                                })
-            instance = UserCandidate(name=name , email=email , phone=phone, ctc=ctc , role=role)
-            instance.save()
-            return JsonResponse({'status':'success' , 'message':'user created' , 'data':   
-                                        { 'Id':instance.id , 'name':instance.name,
-                                        'phone': instance.phone , 'email':instance.email,
-                                        'role':instance.role , 'CTC': instance.ctc 
                                         }
                                 })
         except Exception as err:
