@@ -32,7 +32,7 @@ def create_user_view(request):
             else:
                 instance = UserCandidate(name=name , email=email , phone=phone, role=role)
                 instance.save()
-                msg, sts ='user created' , 'sccuess'
+                msg, sts ='user created' , 'succuess'
             return JsonResponse({'status':sts , 'message':msg , 'data':   
                                         { 'Id':instance.id , 'name':instance.name,
                                         'phone': instance.phone , 'email':instance.email,
