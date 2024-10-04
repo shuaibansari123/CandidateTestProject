@@ -4,6 +4,7 @@ from aiohttp import content_disposition_filename
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 from .models import UserCandidate , Question, Answer
 
 
@@ -20,7 +21,6 @@ def create_user_view(request):
             name = data.get('name')
             email = data.get('email')
             phone = data.get('phone') 
-            ctc = data.get('ctc')
             role = data.get('role')
 
             instance = UserCandidate.objects.filter( email=email ).first()
@@ -28,7 +28,15 @@ def create_user_view(request):
                 return JsonResponse({'status':'failed' , 'message':'email already exist' , 'data':   
                                         { 'Id':instance.id , 'name':instance.name,
                                         'phone': instance.phone , 'email':instance.email,
-                                        'role':instance.role , 'CTC': instance.ctc 
+                                        'role':instance.role 
+                                        }
+                                })
+            instance = UserCandidate.objects.filter( phone=phone ).first()
+            if instance:
+                return JsonResponse({'status':'failed' , 'message':'phone already exist' , 'data':   
+                                        { 'Id':instance.id , 'name':instance.name,
+                                        'phone': instance.phone , 'email':instance.email,
+                                        'role':instance.role 
                                         }
                                 })
             instance = UserCandidate(name=name , email=email , phone=phone, ctc=ctc , role=role)
@@ -71,7 +79,6 @@ def get_single_question_view(request , id):
         question_text = question_instance.question_text
         if question_text == 'None' :
             question_text = question_instance.question_formatted_text
-        
             return JsonResponse({'status':'success' , 'data' : 
                                             { "question_type" : "formatted-text" ,
                                             'hint': "to correctly display this field use this <div dangerouslySetInnerHTML={{ __html: questionData.question_text }} />" , 
@@ -102,7 +109,7 @@ def get_all_question(request):
 
 
 @csrf_exempt
-def list_all_attended_attend(request):
+def list_all_attended_user(request):
     '''
     List all user who has submitted the answers.
     '''
@@ -123,5 +130,6 @@ def user_answers_result_view(request, user_id):
         'user': user,
         'answers': answers,
         'total_attended_answers': total_attended_answers,
-        'total_correct_answers': total_correct_answers
+        'total_correct_answers': total_correct_answers , 
+        'total_incorrect_answers': total_attended_answers - total_correct_answers  , 
     })
