@@ -43,7 +43,6 @@ const validationSchema = Yup.object({
     .matches(/^[0-9]+$/, "Must be a number"),
   email: Yup.string().email("Invalid email format").required("Email is required"),
   testType: Yup.string().required("Test type is required"),
-  ctc: Yup.string().required("Expected CTC is required"),
 });
 
 export default function SignUpForm() {
@@ -58,7 +57,6 @@ export default function SignUpForm() {
           name: values.name,
           email: values.email,
           phone: values.phone,
-          ctc: values.ctc,
           role: values.testType,
         }
       );
@@ -84,7 +82,6 @@ export default function SignUpForm() {
 
   const handleModalConfirm = () => {
     setIsModalOpen(false);
-  
     const candidateId = localStorage.getItem('candidateId'); 
     navigate("/test-start", {
       state: { startTimer: true, candidateId },
@@ -92,17 +89,23 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="">
-      <div className="flex flex-col lg:flex-row items-center gap-8 max-h-screen">
-        <div className="md:w-1/2 hidden lg:block ">
+    <div className="relative">
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{
+          backgroundImage: "url('background.png')",
+        }}
+      ></div>
+      <div className="relative flex flex-col lg:flex-row items-center gap-8 max-h-screen">
+        <div className="md:w-1/2 hidden lg:block">
           <img src="online_test.png" alt="" style={{ maxHeight: "100vh" }} />
         </div>
         <div
           className="w-full max-w-lg px-4 lg:px-0 lg:w-1/2 lg:ml-10"
           style={{ padding: "40px 20px 0px" }}
         >
-          <div className="block lg:hidden">
-            <img src="logos.png" alt="logos" className="w-45 h-auto" />
+          <div className="block lg:hidden mb-4">
+            <img src="logos.png" alt="logos" className="w-40 h-auto" />
           </div>
           <h1 className="text-3xl font-bold mb-6">
             Please Sign up for the test!
@@ -114,21 +117,14 @@ export default function SignUpForm() {
               phone: "",
               email: "",
               testType: "",
-              ctc: "",
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
             {({ isValid, dirty, errors, touched }) => (
               <Form className="space-y-4">
-             
-                {console.log({ isValid, dirty, errors, touched })}
-
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                     Enter Name
                   </label>
                   <Field
@@ -142,12 +138,8 @@ export default function SignUpForm() {
                     <div className="text-red-600 text-sm">{errors.name}</div>
                   )}
                 </div>
-
                 <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
                     Phone Number
                   </label>
                   <Field
@@ -161,12 +153,8 @@ export default function SignUpForm() {
                     <div className="text-red-600 text-sm">{errors.phone}</div>
                   )}
                 </div>
-
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                     Enter Email Address
                   </label>
                   <Field
@@ -180,12 +168,8 @@ export default function SignUpForm() {
                     <div className="text-red-600 text-sm">{errors.email}</div>
                   )}
                 </div>
-
                 <div>
-                  <label
-                    htmlFor="testType"
-                    className="block text-sm font-medium text-gray-700 mb-1 flex items-center"
-                  >
+                  <label htmlFor="testType" className="block text-sm font-medium text-gray-700 mb-1">
                     Select Test Type
                   </label>
                   <div className="relative">
@@ -208,36 +192,11 @@ export default function SignUpForm() {
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </span>
                   </div>
                 </div>
-
-                <div>
-                  <label
-                    htmlFor="ctc"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Expected CTC
-                  </label>
-                  <Field
-                    type="text"
-                    id="ctc"
-                    name="ctc"
-                    placeholder="For Ex. 35000"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  />
-                  {errors.ctc && touched.ctc && (
-                    <div className="text-red-600 text-sm">{errors.ctc}</div>
-                  )}
-                </div>
-
                 <div>
                   <button
                     type="submit"
@@ -252,11 +211,7 @@ export default function SignUpForm() {
           </Formik>
         </div>
       </div>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
-        onConfirm={handleModalConfirm}
-      />
+      <Modal isOpen={isModalOpen} onClose={handleModalClose} onConfirm={handleModalConfirm} />
       <Toaster />
     </div>
   );
