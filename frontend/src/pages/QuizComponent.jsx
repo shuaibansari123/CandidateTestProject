@@ -135,7 +135,7 @@ const QuizComponent = () => {
         className="w-full max-lg-md mx-auto px-4 lg:px-0 lg:w-1/2 lg:ml-10"
         style={{ padding: "40px 20px 0px" }}
       >
-        <div className="block lg:hidden mb-4">
+        <div className="block lg:hidden mb-5">
           <img src="logos.png" alt="logos" className="w-40 h-auto" />
         </div>
 

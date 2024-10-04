@@ -104,8 +104,8 @@ export default function SignUpForm() {
           className="w-full max-w-lg px-4 lg:px-0 lg:w-1/2 lg:ml-10"
           style={{ padding: "40px 20px 0px" }}
         >
-          <div className="block lg:hidden">
-            <img src="logos.png" alt="logos" className="w-45 h-auto" />
+          <div className="block lg:hidden mb-5">
+            <img src="logos.png" alt="logos" className="w-40 h-auto" />
           </div>
           <h1 className="text-3xl font-bold mb-6">
             Please Sign up for the test!
