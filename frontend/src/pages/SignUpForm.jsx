@@ -83,15 +83,17 @@ export default function SignUpForm() {
   const handleModalConfirm = () => {
     setIsModalOpen(false);
     const candidateId = localStorage.getItem('candidateId'); 
+    // alert("i m here..")
     navigate("/test-start", {
       state: { startTimer: true, candidateId },
     });
+    // alert("i m here again..")
   };
 
   return (
     <div className="relative">
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
+        className="absolute inset-0 bg-cover bg-center opacity-50"
         style={{
           backgroundImage: "url('background.png')",
         }}
@@ -104,8 +106,8 @@ export default function SignUpForm() {
           className="w-full max-w-lg px-4 lg:px-0 lg:w-1/2 lg:ml-10"
           style={{ padding: "40px 20px 0px" }}
         >
-          <div className="block lg:hidden mb-4">
-            <img src="logos.png" alt="logos" className="w-40 h-auto" />
+          <div className="block lg:hidden">
+            <img src="logos.png" alt="logos" className="w-45 h-auto" />
           </div>
           <h1 className="text-3xl font-bold mb-6">
             Please Sign up for the test!

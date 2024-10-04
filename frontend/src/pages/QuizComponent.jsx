@@ -151,7 +151,14 @@ const QuizComponent = () => {
           </span>
         </div>
 
-        <h2 className="text-lg font-semibold mb-6">{question.text}</h2>
+        {/* <h2 className="text-lg font-semibold mb-6">{question.text}</h2> */}
+        <h2 className="text-lg font-semibold mb-6">
+      {question.type === "formatted-text" ? (
+        <span dangerouslySetInnerHTML={{ __html: question.text }} />
+      ) : (
+        question.text
+      )}
+    </h2>
         <div className="space-y-3">
           {question.options.map((option, index) => (
             <label
