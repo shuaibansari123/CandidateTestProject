@@ -11,11 +11,11 @@ const QuizComponent = () => {
   const [question, setQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
   // const [candidateId] = useState();
-  
+
   const [questionId, setQuestionId] = useState(1);
-  const [timeRemaining, setTimeRemaining] = useState(12 * 60);  
+  const [timeRemaining, setTimeRemaining] = useState(12 * 60);
   const [isTimeUpModalOpen, setIsTimeUpModalOpen] = useState(false);
-  
+
   const location = useLocation();
   const { startTimer, candidateId } = location.state || {};
 
@@ -87,7 +87,7 @@ const QuizComponent = () => {
         if (questionId > 19) {
           navigate("/submitted");
         } else {
-          setQuestionId((prevId) => prevId + 1); 
+          setQuestionId((prevId) => prevId + 1);
         }
         setSelectedAnswer(null);
       } else {
@@ -113,13 +113,21 @@ const QuizComponent = () => {
     window.history.pushState(null, "", window.location.href);
     setTimeout(() => {
       if (window.opener) {
-        window.close(); 
+        window.close();
       }
     }, 1000);
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-5 max-h-screen">
+    <div className="relative"
+  >
+     <div
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{
+          backgroundImage: "url('background.png')",
+        }}
+      ></div>
+ <div className="flex flex-col md:flex-row items-center gap-5 max-h-screen">
       <div className="lg:w-1/1 hidden lg:block">
         <img src="online_test.png" alt="" style={{ maxHeight: "100vh" }} />
       </div>
@@ -185,8 +193,12 @@ const QuizComponent = () => {
         {isTimeUpModalOpen && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-85 flex items-center justify-center">
             <div className="bg-white p-8 rounded-lg shadow-xl max-w-[400px]">
-              <h1 className="text-[36px] text-center mb-4 font-bold">Time's Up!</h1>
-              <h5 className="text-center mb-4">Your time to complete the test is over.</h5>
+              <h1 className="text-[36px] text-center mb-4 font-bold">
+                Time's Up!
+              </h1>
+              <h5 className="text-center mb-4">
+                Your time to complete the test is over.
+              </h5>
               <button
                 className="w-full bg-red-500 text-white py-2 rounded"
                 onClick={handleClose}
@@ -198,6 +210,8 @@ const QuizComponent = () => {
         )}
       </div>
     </div>
+    </div>
+   
   );
 };
 
